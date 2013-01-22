@@ -1,0 +1,88 @@
+<% content_for :content do %>
+
+    <div class="item-info">
+        <img class="map-img" src="http://maps.googleapis.com/maps/api/staticmap?center=<%= @city.name %>,<%= @city.country.name %>&zoom=10&size=470x280&sensor=false">
+        <div class="gradient"></div>
+        <div class="info">
+            <div class="info-cell">
+                <div class="inline">
+                    <h1><%= @city.name %><h1>
+                    <h2><%= link_to @city.country.name, @city.country %></h2>
+                </div>
+                <div class="description">
+                    <%= @city.description %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Administration panel, visible only to administrator -->
+    <div class="item-buttons">
+        <% if @parent_tab == :page %>
+            <%= link_to "Edit page", edit_city_page_path(@city, @page), :class => "btn" %>
+            <%= link_to "Delete page", city_page_path(@city, @page), 
+                :class => "btn btn-danger",
+                :method => :delete, 
+                :confirm => "Are you sure you want to delete this page?" %>
+            <div class="button-separator">
+                <div></div>
+            </div>
+        <% end %>
+        
+        <% if @parent_tab != :page_new %>
+            <%= link_to "Add Page", new_city_page_path(@city), :class => "btn" %>
+        <% end %>
+        <%= link_to "Edit", edit_city_path(@city), :class => "btn" %>
+        <%= link_to "Delete", @city, 
+            :class => "btn btn-danger",
+            :method => :delete,
+            :confirm => "Are you sure you want to delete this city?" %>
+    </div>
+
+    <% if @parent_tab and @parent_tab != :page_new %>
+
+        <div class="tabbable tabs-left item-content">
+
+            <!-- Navigation -->
+            <ul class="nav nav-tabs">
+                <li<%= raw(' class="active"') if @parent_tab == :universities %>>
+                    <%= link_to "Universities", @city %>
+                </li>
+
+                <!-- Add a tab for each page -->
+                <% @city.pages.each do |page| %>
+                    <li<%= raw(' class="active"') if @parent_tab == :page and @page.id == page.id %>>
+                        <%= link_to page.title, city_page_path(@city, page) %>
+                    </li>
+                <% end %>
+
+                <li<%= raw(' class="active"') if @parent_tab == :forum %>>
+                    <%= link_to "Forum", city_topics_path(@city) %>
+                </li>
+            </ul>
+
+            <!-- Page content -->
+            <div class="tab-content">  
+
+                <%= content_for?(:city_detail_content) ? yield(:city_detail_content) : yield %>
+                
+            </div>
+
+        </div>
+
+    <% else %>
+
+        <div class="item-bare-content">
+            <%= content_for?(:city_detail_content) ? yield(:city_detail_content) : yield %>
+        </div>
+
+    <% end %>
+
+    <ul class="breadcrumb">
+        <li><%= link_to "Home", root_url %> <span class="divider">/</span></li>
+        <li><%= link_to "Cities", cities_path %> <span class="divider">/</span></li>
+        <%= yield(:city_breadcrumbs) if content_for?(:city_breadcrumbs) %>
+    </ul>
+
+<% end %>
+<%= render :template => "layouts/application" %>

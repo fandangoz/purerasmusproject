@@ -1,0 +1,19 @@
+<% if @city then content_for :city_breadcrumbs do %>
+    <li class="active"><%= @city.name %></li>
+<% end end %>
+
+<% if @university then content_for :university_breadcrumbs do %>
+    <li class="active"><%= @university.name_original %></li>
+<% end end %>
+
+<% if @page %>
+
+	<h4><%= @page.title %></h4>
+
+	<hr>
+
+	<div class="page-content">
+	    <%= raw @md_body %>
+	</div>
+
+<% end %>

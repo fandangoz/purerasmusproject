@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Purerasmus</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="/">Purerasmus</a>
+
+                <div class="nav-collapse collapse">
+                    <ul class="nav">                        
+                        <% if @site_user %>
+                            <li class="dropdown<%= ' active' if @tab == :city %>">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    Cities
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><%= link_to "Find a City", cities_path %></li>
+                                    <li class="divider"></li>
+                                    <% # Display a link to the home and foreign cities of the user, if any. %>
+                                    <% if @site_user and (@site_user.home_university or @site_user.foreign_university) %>
+                                        <% if @site_user.home_university %>
+                                            <li><%= link_to @site_user.home_university.city.name, @site_user.home_university.city %></li>
+                                        <% end %>
+                                        <% if @site_user.foreign_university and @site_user.foreign_university.city != @site_user.home_university.city %>
+                                            <li><%= link_to @site_user.foreign_university.city.name, @site_user.foreign_university.city %></li>
+                                        <% end %>
+                                        <li class="divider"></li>            
+                                    <% end %>
+                                    <li><%= link_to "Add a City", new_city_path %></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    Universities
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><%= link_to "Find a University", universities_path %></li>
+                                    <li class="divider"></li>
+                                    <% # Display a link to the home and foreign universities of the user, if any. %>
+                                    <% if @site_user and (@site_user.home_university or @site_user.foreign_university) %>
+                                        <% if @site_user.home_university %>
+                                            <li><%= link_to @site_user.home_university.name_original, @site_user.home_university %></li>
+                                        <% end %>
+                                        <% if @site_user.foreign_university and @site_user.foreign_university != @site_user.home_university %>
+                                            <li><%= link_to @site_user.foreign_university.name_original, @site_user.foreign_university %></li>
+                                        <% end %>
+                                        <li class="divider"></li>
+                                    <% end %>
+                                    <li><%= link_to "Add a University", new_university_path %></li>
+                                </ul>
+                            </li>
+                        <% end %>
+                    </ul>
+
+                    <form class="navbar-search pull-left">
+                        <input type="text" class="search-query" placeholder="Find a City or a University">
+                    </form>
+
+                    <ul class="nav pull-right"> 
+                        <% if @site_user %>
+                            <li class="dropdown<%= ' active' if @tab == :user %>">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <%= image_tag @site_user.gravatar_url, :class => "avatar" %>
+                                    <span class="picture-label"><%= @site_user.full_name %></span>
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><%= link_to "My account", @site_user %></li>
+                                    <li><%= link_to "Logout", logout_path %></li>
+                                </ul>
+                            </li>
+                        <% else %>       
+                            <li<%= raw ' class="active"' if @tab == :register %>>
+                                <%= link_to "Register", new_user_path %>
+                            </li>         
+                            <li<%= raw ' class="active"' if @tab == :login %>>
+                                <%= link_to "Login", login_path %>
+                            </li>
+                        <% end %>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="content">
+
+            <%= content_for?(:content) ? yield(:content) : yield %>
+
+        </div>
+
+        <hr>
+
+        <footer>
+            <p>Purerasmus &copy; 2012</p>
+        </footer>
+
+    </div> <!-- /container -->
+
+</body>
+</html>

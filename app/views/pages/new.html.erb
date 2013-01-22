@@ -1,0 +1,26 @@
+<% if @city then content_for :city_breadcrumbs do %>
+	<li><%= link_to @city.name, @city %> <span class="divider">/</span></li>
+	<li class="active">New page</li>
+<% end end %>
+
+<% if @university then content_for :university_breadcrumbs do %>
+	<li><%= link_to @university.name_original, @university %> <span class="divider">/</span></li>
+	<li class="active">New page</li>
+<% end end %>
+
+<h3>Add a new page</h3>
+
+<hr>
+
+<%= form_for [@city ? @city : @university, @page] do |f| %>
+	<%= render :partial => "edit_page", :locals => {
+		:f => f
+	} %>
+	
+    <div class="form-actions">
+		<%= f.submit "Create", :class => "btn btn-primary" %>
+		<%= link_to "Cancel", @city ? @city : @university, :class => "btn" %>
+	</div>
+<% end %>
+
+<script src="/assets/ace/ace.js" type="text/javascript" charset="utf-8"></script>

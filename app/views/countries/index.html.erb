@@ -1,0 +1,22 @@
+<h1>Countries</h1>
+
+<hr />
+<p class="text-info">Are you looking for any country? Here you can!</p>
+<hr />
+<% if @countries.empty? %>
+<em> No countries found</em>
+<br>
+<% else %> 
+<ul class="inline">
+<% @countries.each do |country| %>
+		<li><%= link_to country.name, country %></li>
+<% end %>
+</ul>	
+<% end %>
+
+<% if @user %>
+	<br>
+	<%= link_to "Add new country", {:action => 'new' }, :class => "btn"%><br>
+	<hr />
+<% end %>
+<%= link_to "Back", :back, :class => "btn" %>

@@ -1,0 +1,38 @@
+<% if @city then content_for :city_breadcrumbs do %>
+    <li><%= link_to @city.name, @city %> <span class="divider">/</span></li
+    <li><%= link_to "Forum", city_topics_path(@city) %> <span class="divider">/</span></li>    
+    <li class="active">Create a new topic</li>
+<% end end %>
+
+<h4>Create a new topic</h4>
+
+<hr>
+
+<%= form_for ([@city, @topic]), :html => { :class => "form-horizontal" } do |f| %>
+
+    <fieldset>
+
+        <!-- Title -->
+        <div class="control-group">
+            <%= f.label :title, "Title", :class => "control-label" %>
+            <div class="controls">
+                <%= f.text_field :title, :placeholder => "Title" %>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div class="control-group">
+            <%= f.label :description, "Content", :class => "control-label" %>
+            <div class="controls">
+                <%= f.text_area :description, :placeholder => "Content", :class => "input-xxlarge", :rows => 10 %>
+            </div>
+        </div>
+
+    </fieldset>
+
+    <div class="form-actions">
+        <%= f.submit "Create", :class => "btn btn-primary" %>
+        <%= link_to "Cancel", city_topics_path(@city), :class => "btn" %>
+    </div>
+
+<% end %>

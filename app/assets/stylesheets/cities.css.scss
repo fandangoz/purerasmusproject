@@ -1,0 +1,153 @@
+.city-find {
+	width: 300px;
+	margin: auto;
+	padding: 20px 0 20px 0;
+	select {
+		font-size: 1.5em;
+		width: 100%;
+		line-height: 40px;
+		height: 40px;
+		&:disabled {
+			opacity: .5;
+		}
+	}
+	div {
+		padding-bottom: 10px;
+	}
+}
+
+.item-info {
+	margin-top: -10px;
+	background-color: #2B2B2B;
+	width: 100%;
+	height: 200px;
+	position: relative;
+
+	.map-img {
+		position: absolute;
+		top: -40px;
+		right: 0;
+		border: none;
+		clip: rect(40px, 470px, 240px, 0px);
+	}
+	.university-img {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 470px;
+		height: 200px;
+		text-align: right;
+		overflow: hidden;
+	}
+	.gradient {
+		position: absolute;
+		top: 0;
+		right: 0px;
+		width: 470px;
+		height: 100%;
+		background-image: -ms-linear-gradient(bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
+        background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
+        background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
+        background-image: -webkit-linear-gradient(bottom, rgba(43, 43, 43, 0.3) 0%, rgba(43, 43, 43, 0) 50%);
+        background-image: linear-gradient(bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+	}
+	.info {
+		display: table;
+		width: 470px;
+		height: 188px;
+		.info-cell {
+			display: table-cell;
+			vertical-align: middle;
+			padding: 0 30px 0 30px;
+		}
+		h1 {
+			color: white;
+			margin: 0;
+			font-size: 2.5em;
+		}
+		h2 {
+			font-size: 1.5em;
+			font-weight: normal;	
+			color: #b1b1b1;
+			margin: 0;
+		}
+		a {
+			color: #CECECE;	
+
+			&:hover {
+				color: white;
+			}	
+		}
+		.inline {
+			h1, h2 {
+				display: inline-block;
+				padding-right: 5px;
+			}
+		}
+		.description {
+			color: #CECECE;
+			font-style: italic;
+			font-size: 0.9em;
+		}
+	}
+}
+
+.item-buttons {
+	width: 920px;
+	padding: 10px;
+	text-align: right;
+	background-color: #EFEFEF;
+	.button-separator {
+		display: inline-block;
+		width: 2px;
+		margin: 0 10px 0 10px;
+		position: relative;
+		div {
+			position: absolute;
+			top: -20px;
+			left: 0;
+			width: 100%;
+			height: 32px;
+			background-color: #E0E0E0;
+		}
+	}
+}
+
+.item-content {
+	padding-top: 40px;	
+	padding-bottom: 10px;
+	.right-buttons {
+		text-align: right;
+		padding-bottom: 20px;
+	}
+	.city-universities {
+		td {
+			cursor: pointer;
+		}
+		tr:nth-child(odd) td {
+	  		background-color: #f9f9f9;
+		}
+		tr:hover td {
+			background-color: #2B2B2B;
+
+			a {
+				color: white;
+			}
+		}
+		a {
+			display: block;
+			width: 100%;
+			height: 100%;
+			color: #333333;
+
+			&:hover {
+				text-decoration: none;
+				color: white;
+			}
+		}
+	}
+}
+
+.item-bare-content {
+	padding: 12px 0 10px 0;
+}

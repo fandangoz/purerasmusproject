@@ -1,0 +1,31 @@
+html {
+    overflow-y: scroll;
+}
+
+.hidden {
+    display: none;
+}
+
+.content {
+    padding-top: 50px;
+    position: relative;
+}
+
+.nav {
+    .avatar {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        top: 5px;
+        border-radius: 5px;
+    }
+    .picture-label {
+    	padding-left: 38px;
+    }
+}
+
+.header-buttons {
+    position: absolute;
+    right: 0;
+    top: 64px;
+}

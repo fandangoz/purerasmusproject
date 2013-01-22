@@ -1,0 +1,28 @@
+
+<% # This view displays a form for a user to create a new City %>
+<h1>Create a new City</h1>
+
+<hr>
+
+<p class="text-info">If your City is not already present on the website, you can use the following form to create it. Make sure to double-check if this City does not already exist though.</p>
+
+<hr>
+
+<%= form_for @city, :html => { :class => "form-horizontal" } do |f| %>
+	<%= render :partial => "city_edit", :locals => {
+		:f => f,
+		:countries => @countries,
+		:mode => :new
+	} %>
+
+	<div class="form-actions">
+		<%= f.submit "Create City", :class => "btn btn-primary" %>
+		<%= link_to "Cancel", cities_path, :class => "btn" %>
+	</div>
+<% end %>
+
+<ul class="breadcrumb">
+	<li><%= link_to "Home", root_url %> <span class="divider">/</span></li>
+	<li><%= link_to "Cities", cities_path %> <span class="divider">/</span></li>
+	<li class="active">New City</li>
+</ul>

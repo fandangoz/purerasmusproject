@@ -1,0 +1,54 @@
+<% if @city then content_for :city_breadcrumbs do %>
+    <li><%= link_to @city.name, @city %> <span class="divider">/</span></li>
+    <li class="active">Forum</li>
+<% end end %>
+
+<h4>Forum</h4>
+
+<hr>
+
+<div class="right-buttons">
+    <%= link_to "Create a new topic", new_city_topic_path(@city), :class => "btn" %>
+</div>
+
+<!-- IN CASE NO TOPICS -->
+<% if @city.topics.empty? %>
+    <h4> No topics found </h4>
+
+<!-- IN CASE TOPICS -->
+<% else %>
+
+    <table class="table table-bordered topics-table">
+        <thead>
+            <tr>
+                <th>Subject</th> 
+                <th>Answers</th>
+                <th>Last message</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <% @topics.each do |topic| %>
+                <a id="topic<%= topic.id %>"></a>
+                <tr>
+                    <td>
+                        <p><%= link_to topic.title, city_topic_path(@city, topic) %></p>
+                        <p><em>by <%= topic.user.full_name %>, at <%= topic.created_at %></em></p>
+                    </td>
+                    <td>
+                        <%= topic.comments.size %>
+                    </td>
+                    <td>
+                        <% if !topic.comments.empty? %>
+                            <%= topic.comments.last.user.full_name %> at <%= topic.comments.last.created_at %>
+                        <% else %>
+                            No answers yet
+                        <% end %>
+                    </td>
+                </tr>
+            <% end %>
+
+        </tbody>
+    </table>
+
+<% end %>
